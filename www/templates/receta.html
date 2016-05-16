@@ -1,0 +1,99 @@
+<ion-view title="Ingredientes" id="page4" ng-init="doRefresh()">
+<ion-nav-bar>
+</ion-nav-bar>
+
+  <ion-view >
+    <ion-nav-buttons side="right">
+    <a style="color: DodgerBlue;" class="button button-icon icon ion-plus" ng-click="openSelectModal()" ></a>
+</ion-nav-buttons>
+
+    <ion-content>
+    <script id="templates/selectModal.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar>
+        <button ng-click="closeSelectModal()" class="button button-clear">
+          <i ng-if="selectModalSlider.currentIndex() == 0" class="icon ion-close-round"></i>
+          <i ng-if="selectModalSlider.currentIndex() > 0" class="icon ion-chevron-left"></i>
+        </button>
+        <h1 class="title">Selecciona Ingredientes:</h1>
+        <button ng-click="cambiaSlide()" class="button button-balanced">
+          <i ng-if="selectModalSlider.currentIndex() == 0" class="icon ion-arrow-right-c"></i>
+          <i ng-if="selectModalSlider.currentIndex() > 0" class="icon ion-checkmark-round"></i>
+        </button>
+      </ion-header-bar>
+      <ion-content class="has-header has-footer">
+        <ion-slide-box delegate-handle="modalSlider" show-pager="false">
+          <ion-slide class="padding">
+            <div class="list">
+              <ion-checkbox ng-repeat="item in nuevos"
+                      ng-model="item.checked"
+                      ng-checked="item.checked">
+                        {{ item.row[0].nombre }}
+            </ion-checkbox>
+            </div>
+          </ion-slide>
+          <ion-slide class="padding">
+            <h3>Inserte cantidades:</h3>
+            <ion-item ng-repeat="item in seleccionados">
+                  {{item.row[0].nombre}}: <input type="text" placeholder="Cantidad" ng-model ="cantidades[$index].item" required>
+          </ion-slide>
+        </ion-slide-box>
+      </ion-content>
+    </ion-modal-view>
+
+  </script>
+<!--
+  <script id="templates/editarIngredienteX.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">Editar Ingrediente</h1>
+          <button ng-click="closeEditarIngrediente()" class="button button-clear">
+            <i class="icon ion-close-round"></i>
+          </button>
+          <button ng-click="editar()" class="button button-balanced">
+            <i class="icon ion-checkmark-round"></i>
+          </button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">Cantidad:</span>
+              <input type="text" placeholder="Cantidad" ng-model ="cantidad" required>
+            </label>
+          </div>
+           <button class="button button-full button-positive" ng-click="editar()">Create</button>
+          {{cantidad}}
+        </ion-content>
+      </ion-modal-view>
+    </script>
+  -->
+
+      <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
+      <ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
+      <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+        <ion-item ng-repeat="item in items"
+                  item="item"
+                  ui-sref="tabsController.producto({recetaID:current,productoID: item.row[1]})" class="item-remove-animate">
+           {{ item.row[0].nombre }}
+          <ion-option-button class="button-assertive"
+                             ng-click="borrar(item)">
+            Delete
+          </ion-option-button>
+          <ion-option-button class="button-calm"
+                              ui-sref="tabsController.editproducto({recetaID:current,productoID: item.row[1]})">
+            Edit
+          </ion-option-button>
+          <!-- <ion-option-button class="button-assertive" ng-click = "setEditItem(item)">
+            Pruebas
+          </ion-option-button> -->
+          <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+        </ion-item>
+
+      </ion-list>
+
+    </ion-content>
+
+</ion-view>

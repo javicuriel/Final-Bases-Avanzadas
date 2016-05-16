@@ -1,0 +1,18 @@
+<ion-view title="Ingrediente" id="page7" ng-init="doRefresh()" >
+
+<ion-content padding="true" class="has-header">
+
+    	<div class="list">
+  <label >
+   Se necesita {{items[0].row[1].cantidad}} de {{items[0].row[2].nombre}}  para la receta de {{items[0].row[0].nombre}}
+    <br>
+  </label>
+</div>
+<section>
+	Se tiene {{calcula[0].row[0].cantidad}} de {{items[0].row[2].nombre}}
+</section>
+
+    <button class="button button-full button-positive" ng-click="$ionicGoBack()">
+    	Terminar
+    </button>
+</ion-view>

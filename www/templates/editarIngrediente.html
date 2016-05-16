@@ -1,0 +1,19 @@
+<ion-view title="Editar Ingrediente" ng-init="doRefresh()" id="page6">
+<ion-content padding="true" class="has-header" >
+    	<div class="list">
+    		<label>Se necesita:</label>
+  <label class="item item-input">
+    <input type="text" placeholder="Cantidad" ng-model ="cantidad" required>
+  </label>
+  <label>Para la receta</label>
+
+</div>
+
+
+<ion-footer-bar class="bar-balanced">
+  <div class="buttons pull-center" ng-click="editar(cantidad);$ionicGoBack()">
+    <button class="button" >Terminar</button>
+  </div>
+</ion-footer-bar>
+
+</ion-view>

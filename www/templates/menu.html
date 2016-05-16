@@ -1,0 +1,74 @@
+<ion-view title="Menu" id="page2" cache-view="false" ng-init="doRefresh()">
+
+  <ion-nav-buttons side="left">
+  <a style="color: Red;" class="button" ng-click="logOut()" >Log Out</a>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <a style="color: DodgerBlue;" class="button {{view}} button-icon icon ion-plus" ng-click="nuevaRecetaModal()" ></a>
+    </ion-nav-buttons>
+
+
+    <ion-content>
+    <ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
+  <script id="templates/nuevaReceta.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">Nuevo Receta</h1>
+          <button ng-click="closeModal()" class="button button-clear">
+            <i class="icon ion-close-round"></i>
+          </button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">Nombre:</span>
+              <input type="text" placeholder="Nombre" ng-model ="saveName.nombre" required>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Costo:</span>
+              <input type="text" placeholder="Costo" ng-model ="saveCosto.costo" required>
+            </label>
+          </div>
+           <button class="button button-full button-positive" ng-click="edit(saveName.nombre,saveCosto.costo)">
+           {{nuevoLabel}}
+           </button>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+      <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
+
+      <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+
+        <ion-item ng-repeat="item in items"
+                  item="item" ng-click="cambia(item)"
+                   class="item-icon-right">
+
+            <!-- <div class="item item-button-right"> -->
+            {{ item.row[0].nombre }} <br>${{item.row[0].costo}}
+            <i class="button button-icon icon ion-ios-plus balanced " ng-click="setAgregar()"></i>
+
+          <ion-option-button class="button-assertive" ng-hide="{{!viewEdit}}"
+                             ng-click="borrar(item)">
+            Delete
+          </ion-option-button>
+          <ion-option-button class="button-calm" ng-hide="{{!viewEdit}}"
+                              ng-click="setEditItem(item)">
+            Edit
+          </ion-option-button>
+          <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+        </ion-item>
+
+      </ion-list>
+
+    </ion-content>
+
+  </body>
+
+  <!--         		<ion-item ng-repeat="item in items">
+    			Hello, {{item.row[0].name}}!
+  			</ion-item> -->
+
+</ion-view>

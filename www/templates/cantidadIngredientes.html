@@ -1,0 +1,16 @@
+<ion-view title="Cantidad Ingredientes" id="page9">
+<ion-nav-bar>
+</ion-nav-bar>
+  <ion-view>
+    <ion-nav-buttons side="right">
+    <a style="color: DodgerBlue;" class="button" ng-click="save()" ui-sref="tabsController.receta({recetaID:current})">Done</a> 
+</ion-nav-buttons>
+<ion-content padding="true" class="has-header" >
+<ion-list>
+  <ion-item ng-repeat="item in items">
+
+    {{item.row[0].nombre}}: <input type="text" placeholder="Cantidad" ng-model ="cantidades[$index].item" required>
+  </ion-item>
+</ion-list>
+</ion-view>
+</ion-view>

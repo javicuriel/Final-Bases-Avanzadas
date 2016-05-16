@@ -1,0 +1,61 @@
+<ion-view title="Cantidades" id="page11" ng-init= "doRefresh()">
+<ion-nav-bar>
+</ion-nav-bar>
+  <ion-view >
+  <script id="templates/editarCantidad.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">Editar Cantidad</h1>
+          <button ng-click="closeModal()" class="button button-clear">
+            <i class="icon ion-close-round"></i>
+          </button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">Cantidad:</span>
+              <input type="text" placeholder="Cantidad" ng-model ="saveCantidad.cantidad" required>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Fecha de Caducidad:</span>
+              <input type="text" placeholder="Fecha de Caducidad" ng-model ="saveFecha.fecha_caducidad" required>
+            </label>
+          </div>
+           <button class="button button-full button-positive" ng-click="editar(saveCantidad.cantidad,saveFecha.fecha_caducidad)">
+          {{nuevoLabel}}
+           </button>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+    <ion-nav-buttons side="right">
+      <a style="color: DodgerBlue;" class="button button-icon icon ion-plus" ng-click="newCantidad()" ></a> 
+    </ion-nav-buttons>
+    <ion-content>
+      <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+      </ion-refresher>
+      <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+        <ion-item ng-repeat="item in items" 
+                  item="item" class="item-remove-animate">
+           Cantidad: {{item.row[0].cantidad}} <br><br>
+           Caducidad: {{item.row[0].fecha_caducidad}}
+           <ion-option-button class="button-assertive"
+                             ng-click="borrar(item)">
+            Delete
+          </ion-option-button>
+          <ion-option-button class="button-calm" ng-click="setEditItem(item)"
+                              >
+            Edit
+          </ion-option-button>
+          <!-- <ion-option-button class="button-assertive" ng-click = "setEditItem(item)">
+            Pruebas
+          </ion-option-button> -->
+          <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+        </ion-item>
+
+      </ion-list>
+
+    </ion-content>
+  
+</ion-view>

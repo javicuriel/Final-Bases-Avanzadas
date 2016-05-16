@@ -1,0 +1,24 @@
+<ion-view title="Editar Receta" id="page5" ng-init ="doRefresh()">
+    <ion-content padding="true" class="has-header">
+    	<div class="list">
+  <label class="item item-input">
+    <input type="text" placeholder="Nombre" ng-model ="nombre" required>
+  </label>
+  <label class="item item-input">
+    <input type="text" placeholder="Precio" ng-model ="costo" required>
+  </label>
+</div>
+
+<button class="button button-full button-positive"
+ui-sref="tabsController.receta({recetaID: items[0].row[1]})" >
+  Ingredientes
+</button>
+
+<ion-footer-bar class="bar-balanced">
+  <div class="buttons pull-center" ng-click="editar(nombre,costo);$ionicGoBack()">
+    <button class="button" >Terminar</button>
+  </div>
+</ion-footer-bar>
+
+
+</ion-view>
